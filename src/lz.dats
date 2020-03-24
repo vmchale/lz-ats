@@ -25,6 +25,17 @@ fn floop { l : addr | l != null }(pf : !bytes_v(l, BUFSZ) | p : ptr(l), inp : !F
   let
     val dptr = LZ_decompress_open()
     
+    fun read_loop { l : addr | l != null }(pf : !bytes_v(l, BUFSZ) | inp : !FILEptr1, dptr : !lzdecoderptr, p : ptr(l)) : void =
+      let
+        val _ = LZ_decompress_read(pf | dptr, p, BUFSZ)
+        var ret = LZ_decompress_finished(dptr)
+      in
+        if ret = 1 then
+          ()
+        else
+          read_loop(pf | inp, dptr, p)
+      end
+    
     fun loop { l : addr | l != null }(pf : !bytes_v(l, BUFSZ) | inp : !FILEptr1, dptr : !lzdecoderptr, p : ptr(l)) : void =
       let
         var file_bytes = freadc(pf | inp, i2sz(BUFSZ), p)
