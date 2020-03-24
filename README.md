@@ -5,4 +5,4 @@
 ## Library
 
 [SATS/lzlib.sats](https://github.com/vmchale/lz-ats/blob/master/SATS/lzlib.sats)
-contains enough to decompress and compress streams.
+contains complete bindings corresponding to `lzlib.h`
