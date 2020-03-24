@@ -37,6 +37,7 @@ fn floop { l : addr | l != null }(pf : !bytes_v(l, BUFSZ) | p : ptr(l), inp : !F
             val () = if BUFSZ > max_sz then
               prerr!("WARNING!")
             val _ = LZ_decompress_write(pf | dptr, p, sz2i(file_bytes))
+            val _ = LZ_decompress_read(pf | dptr, p, BUFSZ)
           in
             loop(pf | inp, dptr, p)
           end
@@ -78,4 +79,4 @@ fn fpath(fp : string) : void =
 // FILEptr_is_null(inp)
 // TODO: file decoder
 implement main0 () =
-  { val () = fpath("test/data/atspkg.dhall.lz") }
+  { val () = fpath("test/data/ulysses.txt.lz") }
