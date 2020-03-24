@@ -6,4 +6,7 @@ in    prelude.default
         [   prelude.bin
           ⫽ { src = "src/lz.dats", target = "${prelude.atsProject}/lz-file" }
         ]
+      , compiler = [ 0, 4, 0 ]
+      , version = [ 0, 3, 13 ]
+      , atsLib = False
       }
