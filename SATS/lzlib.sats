@@ -19,17 +19,18 @@ vtypedef lzencoderptr = [l:addr] (LZ_encoder @ l | ptr(l))
 fn LZ_compress_open(int, int, ullint) : lzencoderptr =
   "ext#"
 
-// TODO: mmap sats 
+// TODO: mmap sats
 fn LZ_compress_close(lzencoderptr) : int =
   "ext#"
 
 fn LZ_compress_finish(lzptr : !lzencoderptr) : int =
   "ext#"
 
-fn LZ_compress_read {l:addr}{sz:nat}(pf : !bytes_v(l, sz) | lzptr : !lzencoderptr, ptr(l), int(sz)) : intLte(sz) =
+fn LZ_compress_read {l:addr}{sz:nat}{ m : nat | m <= sz }(pf : !bytes_v(l, sz) | lzptr : !lzencoderptr, ptr(l), int(m)) :
+  intLte(m) =
   "ext#"
 
-fn LZ_compress_write {l:addr}{sz:nat}(pf : !bytes_v(l, sz) | lzptr : !lzencoderptr, ptr(l), int(sz)) : int =
+fn LZ_compress_write {l:addr}{sz:nat}(pf : !bytes_v(l, sz) | lzptr : !lzencoderptr, ptr(l), intLte(sz)) : int =
   "ext#"
 
 fn LZ_compress_write_size(lzptr : !lzencoderptr) : int =
@@ -51,10 +52,11 @@ fn LZ_decompress_close(lzdecoderptr) : int =
 fn LZ_decompress_finish(lzptr : !lzdecoderptr) : int =
   "ext#"
 
-fn LZ_decompress_read {l:addr}{sz:nat}(pf : !bytes_v(l, sz) | lzptr : !lzdecoderptr, ptr(l), int(sz)) : intLte(sz) =
+fn LZ_decompress_read {l:addr}{sz:nat}{ m : nat | m <= sz }(pf : !bytes_v(l, sz) | lzptr : !lzdecoderptr, ptr(l), int(m)) :
+  intLte(m) =
   "ext#"
 
-fn LZ_decompress_write {l:addr}{sz:nat}(pf : !bytes_v(l, sz) | lzptr : !lzdecoderptr, ptr(l), int(sz)) : int =
+fn LZ_decompress_write {l:addr}{sz:nat}(pf : !bytes_v(l, sz) | lzptr : !lzdecoderptr, ptr(l), intLte(sz)) : int =
   "ext#"
 
 fn LZ_decompress_write_size(lzptr : !lzdecoderptr) : int =
