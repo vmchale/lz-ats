@@ -2,4 +2,4 @@ let prelude =
       https://hackage.haskell.org/package/ats-pkg/src/dhall/atspkg-prelude.dhall
 
 in    λ(x : List Natural)
-    → prelude.makePkg { x = x, name = "lzlib", githubUsername = "vmchale" }
+    → prelude.makePkg { x = x, name = "lz-ats", githubUsername = "vmchale" }
