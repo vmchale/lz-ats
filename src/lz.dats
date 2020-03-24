@@ -1,0 +1,2 @@
+implement main0 () =
+  ()
