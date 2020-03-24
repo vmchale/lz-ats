@@ -9,4 +9,5 @@ in    prelude.default
       , compiler = [ 0, 4, 0 ]
       , version = [ 0, 3, 13 ]
       , atsLib = False
+      , cflags = [ "-O2", "-flto", "-llz" ]
       }
